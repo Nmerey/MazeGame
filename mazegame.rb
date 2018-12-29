@@ -1,18 +1,10 @@
-require 'gosu'
-
-class Tutorial < Gosu::Window
+class Mazegame
   def initialize
-    super 640, 480
-    self.caption = "Tutorial Game"
+    
   end
-  
-  def update
-    # ...
-  end
-  
-  def draw
-    # ...
+
+  def name
+    "Mazegame"
+    
   end
 end
-
-Tutorial.new.show
