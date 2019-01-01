@@ -7,6 +7,12 @@ class Cell
 		@line_color = 0xff_ffffff
 		@w = 40 #length of every wall
 	end
+	
+	def wall_exist?
+
+		walls
+			
+	end
 
 	def top_wall
 		
@@ -34,6 +40,11 @@ class Cell
 
 	private
 
+	def walls
+		walls = [true,true,true,true]
+		
+	end
+
 	def params(i1,j1,i2,j2)
 
 		x1 = @coloum_pos * @w + i1
@@ -45,5 +56,7 @@ class Cell
 		coordinates = [x1,y1,@line_color,x2,y2,@line_color]
 		
 	end
+
+
 
 end

@@ -27,8 +27,13 @@ class Mazegame < Gosu::Window
    	
    	@grids.each do |cell|
 
-   		draw_line(*cell.top_wall)
+   		draw_line(*cell.top_wall) if cell.wall_exist?[0]
    		draw_line(*cell.right_wall)
+   		draw_line(*cell.left_wall)
+   		draw_line(*cell.bottom_wall)
+   		
+
+
 
    		
    	end

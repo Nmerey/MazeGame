@@ -9,6 +9,13 @@ describe "Cell" do
 		end
 	end
 
+	describe ".wall_exist?" do
+		it "draws cell wall if wall exist" do
+			expect(cell.wall_exist?).to eq [true,true,true,true]
+		end
+
+	end
+
 	describe ".top_wall" do
 		it "returns cell's top cordinates" do
 			expect(cell.top_wall).to eq([40,40,0xff_ffffff,80,40,0xff_ffffff])
