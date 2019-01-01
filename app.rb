@@ -11,5 +11,4 @@ rows = gets.chomp.to_i
 
 
 window = Mazegame.new(coloums,rows)
-
 window.show

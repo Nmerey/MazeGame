@@ -1,11 +1,11 @@
 require_relative '../spec_helper'
 
 
-describe "Mazegame" do
+describe Mazegame do
 	before do
 		@game_window = Mazegame.new(15,12)
 		#For all tests to have same window setups 
-
+		@cell = Cell.new(1,1)
 	end
 	
 	describe ".new" do
@@ -14,7 +14,7 @@ describe "Mazegame" do
 
 		end
 
-		it "it is not rectangular" do
+		it "when given parameters is rectangular" do
 			
 			expect(@game_window.width).not_to be @game_window.height
 			expect(@game_window.height).not_to be @game_window.width
