@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 
 describe "Mazegame" do
@@ -19,6 +19,7 @@ describe "Mazegame" do
 			expect(@game_window.width).not_to be @game_window.height
 			expect(@game_window.height).not_to be @game_window.width
 		end
+
 	end
 
 
