@@ -4,6 +4,7 @@ require 'spec_helper'
 describe "Mazegame" do
 	before do
 		@game_window = Mazegame.new(15,12)
+		#For all tests to have same window setups 
 
 	end
 	

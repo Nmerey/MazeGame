@@ -5,8 +5,10 @@ require 'gosu'
 class Mazegame < Gosu::Window
   
   def initialize coloums,rows
-    
-    super coloums*40,rows*40 
+    height = rows*40
+    width = coloums*40
+
+    super width,height
     #every cell will be height and width will be equalt to 40px
     #so self.height = rows number and self.width = coloums number
     self.caption = caption
@@ -17,6 +19,7 @@ class Mazegame < Gosu::Window
   end
   
   def draw
+
     
   end
 
