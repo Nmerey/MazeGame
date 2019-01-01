@@ -9,31 +9,41 @@ class Cell
 	end
 
 	def top_wall
-		x1 = @coloum_pos * @w
-		x2 = x1 + @w
-		y1 = row_pos * @w
-		y2 = y1
-		coordinates = [x1,y1,0xff_ffffff,x2,y2,0xff_ffffff]
+		
+		params(0,0,@w,0)
+	
 	end
 
 	def bottom_wall
-		x1 = @coloum_pos * @w
-		x2 = x1 + @w
-		y1 = row_pos * @w + @w
-		y2 = y1
+
+		params(0,@w,@w,@w)
+
 	end
 
 	def left_wall
+
+		params(0,0,0,@w)
 		
 	end
 
 	def right_wall
-		x1 = @coloum_pos * @w + @w
-		x2 = x1
-		y1 = @row_pos * @w
-		y2 = y1 + @w
 
-		coordinates = [x1,y1,0xff_ffffff,x2,y2,0xff_ffffff]	
+		params(@w,0,@w,@w)
+		
+	end
+
+	private
+
+	def params(i1,j1,i2,j2)
+
+		x1 = @coloum_pos * @w + i1
+		y1 = @row_pos * @w + j1
+
+		x2 = @coloum_pos * @w + i2
+		y2 = @row_pos * @w + j2
+
+		coordinates = [x1,y1,@line_color,x2,y2,@line_color]
+		
 	end
 
 end

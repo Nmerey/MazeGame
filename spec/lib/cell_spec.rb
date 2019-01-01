@@ -9,13 +9,32 @@ describe "Cell" do
 		end
 	end
 
-	describe ".top_line" do
+	describe ".top_wall" do
 		it "returns cell's top cordinates" do
 			expect(cell.top_wall).to eq([40,40,0xff_ffffff,80,40,0xff_ffffff])
 		end
 
-		it "returns cell's right wall cordinates" do
+	end	
+	describe ".right_wall" do
+		it "returns cell's right cordinates" do
 			expect(cell.right_wall).to eq([80,40,0xff_ffffff,80,80,0xff_ffffff])
 		end
+
+	end	
+
+	describe ".bottom_wall" do
+		it "returns cell's bottom cordinates" do
+			expect(cell.bottom_wall).to eq([40,80,0xff_ffffff,80,80,0xff_ffffff])
+		end
+
+	end	
+
+	describe ".left_wall" do
+		it "returns cell's left cordinates" do
+			expect(cell.left_wall).to eq([40,40,0xff_ffffff,40,80,0xff_ffffff])
+		end
+
 	end
+
+
 end

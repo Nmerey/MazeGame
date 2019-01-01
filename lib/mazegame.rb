@@ -42,8 +42,8 @@ class Mazegame < Gosu::Window
 
   private
   
-  #Considerated as a good coding habit to write privet methods
-  
+  #Considerated as a good coding habit to write private methods
+
   def grids 
 
   	@coloums.times do |i|
