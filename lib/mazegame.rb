@@ -9,7 +9,7 @@ class Mazegame < Gosu::Window
   	@rows = rows
     height = @rows*40
     width = @coloums*40
-    @grids = []
+    @grids = [] #All Cells combined gives grids
    
     super width,height
     #every cell will be height and width will be equalt to 40px
@@ -20,22 +20,10 @@ class Mazegame < Gosu::Window
   def update
     # ...
   end
-
-  def grids
-
-  	@coloums.times do |i|
-   		@rows.times do |j|
-   			@grids << Cell.new(i,j)
-   			
-   		end
-   		
-   	end
-  	
-  end
   
    def draw
 
-   	self.grids
+   	grids #Gathering all the cells before iteration
    	
    	@grids.each do |cell|
 
@@ -51,4 +39,21 @@ class Mazegame < Gosu::Window
     "Mazegame"
     
   end
+
+  private
+  
+  #Considerated as a good coding habit to write privet methods
+  
+  def grids 
+
+  	@coloums.times do |i|
+   		@rows.times do |j|
+   			@grids << Cell.new(i,j)
+   			
+   		end
+   		
+   	end
+  	
+  end
+
 end
