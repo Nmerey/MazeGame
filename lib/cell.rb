@@ -7,11 +7,11 @@ class Cell
 		@line_color = 0xff_ffffff
 		@w = 40 #length of every wall
 	end
-	
-	def wall_exist?
 
-		walls
-			
+	def walls_exist?(x1 = true,y1 = true,x2 = true,y2 = true)
+
+		walls = [x1,y1,x2,y2]
+		
 	end
 
 	def top_wall
@@ -40,10 +40,11 @@ class Cell
 
 	private
 
-	def walls
-		walls = [true,true,true,true]
+	# def walls(top = true,right = true ,bottom = true,left = true)
+
+	# 	walls = [top,right,bottom,left]
 		
-	end
+	# end
 
 	def params(i1,j1,i2,j2)
 
