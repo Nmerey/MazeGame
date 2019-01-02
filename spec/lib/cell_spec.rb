@@ -2,6 +2,7 @@ require_relative '../spec_helper'
 
 describe "Cell" do
 	let(:cell) {Cell.new(1,1)}
+	let(:cell2) {Cell.new(0,0)}
 	describe ".new" do
 
 		it "runs cell instance" do
@@ -29,6 +30,10 @@ describe "Cell" do
 		let(:all_cells) {[nil,cell_top,nil,cell_left,cell,cell_right,nil,cell_bottom,nil]}
 		it " returns array of neighbour cells" do
 			expect(cell.check_neighbours(all_cells,3)).to eq [cell_top,cell_right,cell_bottom,cell_left]
+		end
+
+		it "when one or more of the neighbours is out of box" do
+			expect(cell2.check_neighbours(all_cells,3)).to eq ([cell_top,cell_left])
 		end
 
 	end
