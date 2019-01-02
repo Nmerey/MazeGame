@@ -5,12 +5,16 @@ require 'byebug'
 class Mazegame < Gosu::Window
   
   def initialize coloums,rows
+
   	@coloums = coloums
   	@rows = rows
     height = @rows*40
     width = @coloums*40
     @grids = [] #All Cells combined gives grids
-   
+    @current = Cell.all.first #Just for now starting point is first cell
+    @visite_color = Gosu::Color.argb(0xff_808080)
+
+
     super width,height
     #every cell will be height and width will be equalt to 40px
     #so self.height = rows number and self.width = coloums number
@@ -18,12 +22,16 @@ class Mazegame < Gosu::Window
   end
   
   def update
-    # ...
+    
+    grids #Gathering all the cells before iteration
+  	@current = @grids.first
+   	@current.visit
+   	
   end
   
    def draw
 
-   	grids #Gathering all the cells before iteration
+   	
    	
    	@grids.each do |cell|
 
@@ -32,6 +40,12 @@ class Mazegame < Gosu::Window
    		draw_line(*cell.left_wall) if cell.walls_exist?[2]
    		draw_line(*cell.bottom_wall) if cell.walls_exist?[3]
    		
+   	end
+
+   
+
+   	if @current.visited
+   		draw_rect(@current.coloum_pos,@current.row_pos,40,40,@visite_color)
    	end
 
   end

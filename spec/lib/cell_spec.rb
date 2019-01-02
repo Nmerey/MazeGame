@@ -3,9 +3,21 @@ require_relative '../spec_helper'
 describe "Cell" do
 	let(:cell) {Cell.new(1,1)}
 	describe ".new" do
+
 		it "runs cell instance" do
+
 			expect(cell).to be_an_instance_of Cell
 
+		end
+	end
+
+	describe ".visited?" do
+		before do
+				visit_cell(cell)
+			end
+		it "fills gray when curren cell is visited" do
+
+			expect(cell.visited).to be true
 		end
 	end
 
@@ -51,6 +63,14 @@ describe "Cell" do
 			expect(cell.left_wall).to eq([40,40,0xff_ffffff,40,80,0xff_ffffff])
 		end
 
+	end
+
+	private
+
+	def visit_cell(cell)
+
+		cell.visit
+		
 	end
 
 

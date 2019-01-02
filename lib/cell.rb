@@ -1,11 +1,21 @@
 class Cell
-	attr_accessor :coloum_pos, :row_pos
+	attr_accessor :coloum_pos, :row_pos, :visited #making cell visitable
+	
+	@@all = []
 
-	def initialize(coloum_pos,row_pos)
+	def initialize(coloum_pos,row_pos,visited = false)
 		@coloum_pos = coloum_pos
 		@row_pos = row_pos
 		@line_color = 0xff_ffffff
 		@w = 40 #length of every wall
+		@@all << self
+		@visited = visited
+	end
+
+	def visit #run this method when cell is visited
+
+		@visited = true
+		
 	end
 
 	def walls_exist?(x1 = true,y1 = true,x2 = true,y2 = true)
@@ -36,6 +46,12 @@ class Cell
 
 		params(@w,0,@w,@w)
 		
+	end
+
+	def self.all
+		
+		@@all
+
 	end
 
 	private
