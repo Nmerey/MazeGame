@@ -12,6 +12,19 @@ class Cell
 		@visited = visited
 	end
 
+	def check_neighbours(all_cells,coloums)
+		
+		top_index = self.coloum_pos + (self.row_pos - 1) * coloums
+		right_index = self.coloum_pos + 1 + self.row_pos * coloums
+		bottom_index = self.coloum_pos + (self.row_pos + 1) * coloums
+		left_index = self.coloum_pos - 1 + self.row_pos * coloums
+		
+		neighbours = [all_cells[top_index],all_cells[right_index],all_cells[bottom_index],all_cells[left_index]]
+
+
+		
+	end
+
 	def visit #run this method when cell is visited
 
 		@visited = true

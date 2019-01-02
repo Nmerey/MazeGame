@@ -13,12 +13,14 @@ class Mazegame < Gosu::Window
     @grids = [] #All Cells combined gives grids
     @current = Cell.all.first #Just for now starting point is first cell
     @visite_color = Gosu::Color.argb(0xff_808080)
+    @neighbours = []
 
 
     super width,height
-    #every cell will be height and width will be equalt to 40px
-    #so self.height = rows number and self.width = coloums number
+    #every cell's height and width is equal to 40px
+    #so self.height = row numbers and self.width = coloum numbers
     self.caption = caption
+
   end
   
   def update
@@ -26,7 +28,10 @@ class Mazegame < Gosu::Window
     grids #Gathering all the cells before iteration
   	@current = @grids.first
    	@current.visit
-   	
+
+   	@current.check_neighbours
+   	jump_to_next_cell
+
   end
   
    def draw
