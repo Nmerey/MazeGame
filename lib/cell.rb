@@ -15,12 +15,22 @@ class Cell
 	def check_neighbours(all_cells,coloums)
 
 		top_index = self.coloum_pos + (self.row_pos - 1) * coloums
-		right_index = self.coloum_pos + 1 + self.row_pos * coloums
+		right_index = (self.coloum_pos + 1) + self.row_pos * coloums
 		bottom_index = self.coloum_pos + (self.row_pos + 1) * coloums
-		left_index = self.coloum_pos - 1 + self.row_pos * coloums
+		left_index = (self.coloum_pos - 1) + self.row_pos * coloums 
 		
+		if top_index < 0
+			all_cells[top_index] = nil
+		elsif right_index < 0
+			all_cells[right_index] = nil
+		elsif bottom_index < 0
+			all_cells[bottom_index] = nil
+		elsif left_index < 0
+			all_cells[left_index] = nil
+		end
+
 		neighbours = [all_cells[top_index],all_cells[right_index],all_cells[bottom_index],all_cells[left_index]]
-		neighbours.compact
+		neighbours.compact #get rid off all cells which are out of the box
 
 		
 	end

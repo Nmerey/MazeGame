@@ -15,6 +15,7 @@ class Mazegame < Gosu::Window
     @visite_color = Gosu::Color.argb(0xff_808080)
     @neighbours = []
 
+    grids #Gathering all the cells before iteration
 
     super width,height
     #every cell's height and width is equal to 40px
@@ -25,12 +26,13 @@ class Mazegame < Gosu::Window
   
   def update
     
-    grids #Gathering all the cells before iteration
+    
   	@current = @grids.first
    	@current.visit
 
-   	@current.check_neighbours
-   	jump_to_next_cell
+   	@current.check_neighbours(@grids,@coloums + 1)
+   	byebug
+   	
 
   end
   
@@ -68,7 +70,7 @@ class Mazegame < Gosu::Window
 
   	@coloums.times do |i|
    		@rows.times do |j|
-   			@grids << Cell.new(i,j)
+   			@grids << Cell.new(j,i)
    			
    		end
    		
