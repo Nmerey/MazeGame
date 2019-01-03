@@ -45,20 +45,10 @@ describe "Cell" do
 
 	end
 
-	describe ".walls_exist?" do
-		it "draws all sides if all walls exist" do
-			expect(cell.walls_exist?).to eq [true,true,true,true]
-		end
-		it "draws only top wall " do 
-			expect(cell.walls_exist?(true,false,false,false)).to eq [true,false,false,false]
-		end
+	describe ".walls" do
 
-		it "draws other 3 sides when on side is not there" do
-			expect(cell.walls_exist?(false)).to eq [false,true,true,true]
-		end
-
-		it "draws other 2 sides when 2 side is not there" do
-			expect(cell.walls_exist?(false,true,false)).to eq [false,true,false,true]
+		it " draws all sides if all walls exist" do
+			expect(cell.walls).to eq [true,true,true,true]
 		end
 	end
 

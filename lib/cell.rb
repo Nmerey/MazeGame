@@ -11,6 +11,7 @@ class Cell
 		@w = 40 #length of every wall
 		@@all << self
 		@visited = visited
+		@walls = [true,true,true,true]
 	end
 
 	def check_neighbours(all_cells,coloums,rows)
@@ -54,9 +55,9 @@ class Cell
 		
 	end
 
-	def walls_exist?(x1 = true,y1 = true,x2 = true,y2 = true)
+	def walls
 
-		walls = [x1,y1,x2,y2]
+		@walls
 		
 	end
 

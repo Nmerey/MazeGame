@@ -37,11 +37,14 @@ class Mazegame < Gosu::Window
 	   		
 	   		r = rand(neighbours.length) 
 	   		
+	   		remove_wall(@current,neighbours[r])
+
 	   		@current = neighbours[r] #Update current cell to random not visited neighbour
 
 	   	end
 	   	
 	else
+
 
 		self.close!
 
@@ -55,10 +58,10 @@ class Mazegame < Gosu::Window
    	
    	@grids.each do |cell|
 
-   		draw_line(*cell.top_wall) if cell.walls_exist?[0]
-   		draw_line(*cell.right_wall) if cell.walls_exist?[1]
-   		draw_line(*cell.left_wall) if cell.walls_exist?[2]
-   		draw_line(*cell.bottom_wall) if cell.walls_exist?[3]
+   		draw_line(*cell.top_wall) if cell.walls[0]
+   		draw_line(*cell.right_wall) if cell.walls[1]
+   		draw_line(*cell.left_wall) if cell.walls[2]
+   		draw_line(*cell.bottom_wall) if cell.walls[3]
 
    		draw_rect(cell.coloum_pos*40,cell.row_pos*40,40,40,@visited_color) if cell.visited
    			
@@ -68,6 +71,34 @@ class Mazegame < Gosu::Window
 
 
   end
+
+  def remove_wall(current,next_cell)
+  		
+  		if current.coloum_pos - next_cell.coloum_pos == 1 #If next cell is left to current cell
+  			
+  			current.walls[3] = false
+  			next_cell.walls[1] = false
+
+  		elsif current.coloum_pos - next_cell.coloum_pos == -1 #If next cell is right to current cell
+  			
+  			next_cell.walls[3] = false
+  			current.walls[1] = false
+
+  		elsif current.row_pos - next_cell.row_pos == 1 #If next cell is top to current cell
+
+  			current.walls[0] = false
+  			next_cell.walls[2] = false
+
+  		elsif current.row_pos - next_cell.row_pos == -1 #If next cell is bottom to current cell
+  			
+  			current.walls[2] = false
+  			next_cell.walls[0] = false
+
+  		end
+  	
+  end
+
+
 
   def caption
     "Mazegame"
