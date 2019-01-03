@@ -31,13 +31,17 @@ describe Mazegame do
 
 	describe ".remove_wall" do
 		
-		it "remove walls when cells next to each other" do
+		it " when next cell is right to current cell" do
 			
 			expect([@cell.walls[1],@cell2.walls[3]]).to eq([false,false])
 		end
 
-		it "wall between top and bottom cells" do
+		it " whne current is top to next" do
 			expect([@cell.walls[2],@cell_bottom.walls[0]]).to eq([false,false])
+		end
+
+		it "when current cell is right to next" do
+			expect([@cell.walls[3],@cell_left.walls[1]]).to eq([false,false])
 		end
 
 	end

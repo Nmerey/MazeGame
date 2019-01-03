@@ -38,7 +38,6 @@ class Mazegame < Gosu::Window
 	   		r = rand(neighbours.length) 
 	   		
 	   		remove_wall(@current,neighbours[r])
-
 	   		@current = neighbours[r] #Update current cell to random not visited neighbour
 
 	   	end
@@ -50,6 +49,7 @@ class Mazegame < Gosu::Window
 
    	end
    	
+   	
   end
   
    def draw
@@ -60,8 +60,8 @@ class Mazegame < Gosu::Window
 
    		draw_line(*cell.top_wall) if cell.walls[0]
    		draw_line(*cell.right_wall) if cell.walls[1]
-   		draw_line(*cell.left_wall) if cell.walls[2]
-   		draw_line(*cell.bottom_wall) if cell.walls[3]
+   		draw_line(*cell.bottom_wall) if cell.walls[2]
+   		draw_line(*cell.left_wall) if cell.walls[3]
 
    		draw_rect(cell.coloum_pos*40,cell.row_pos*40,40,40,@visited_color) if cell.visited
    			
@@ -84,7 +84,9 @@ class Mazegame < Gosu::Window
   			next_cell.walls[3] = false
   			current.walls[1] = false
 
-  		elsif current.row_pos - next_cell.row_pos == 1 #If next cell is top to current cell
+  		end
+
+  		if current.row_pos - next_cell.row_pos == 1 #If next cell is top to current cell
 
   			current.walls[0] = false
   			next_cell.walls[2] = false
@@ -93,8 +95,8 @@ class Mazegame < Gosu::Window
   			
   			current.walls[2] = false
   			next_cell.walls[0] = false
-
   		end
+
   	
   end
 
