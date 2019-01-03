@@ -23,6 +23,7 @@ describe "Cell" do
 	end
 
 	describe ".check_neighbours" do
+
 		let(:cell_top) {Cell.new(1,0)}
 		let(:cell_right) {Cell.new(1,2)}
 		let(:cell_bottom) {Cell.new(1,2)}
@@ -35,6 +36,11 @@ describe "Cell" do
 
 		it "when one or more of the neighbours is out of box" do
 			expect(cell2.check_neighbours(all_cells,3)).to eq ([cell_top,cell_left])
+		end
+
+
+		it "when one or more of the neighbours is visited already" do
+			expect(visited_cells(all_cells,cell)).to eq([cell_right,cell_bottom,cell_left])
 		end
 
 	end
@@ -85,6 +91,13 @@ describe "Cell" do
 
 	private
 
+	def visited_cells(cells,cell)
+
+		cells[1].visit
+		cell.check_neighbours(cells,3)
+		
+	end
+	
 	def visit_cell(cell)
 
 		cell.visit

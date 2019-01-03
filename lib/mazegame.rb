@@ -30,9 +30,7 @@ class Mazegame < Gosu::Window
   	@current = @grids.first
    	@current.visit
 
-   	@current.check_neighbours(@grids,@coloums + 1)
-   	byebug
-   	
+   	@current.check_neighbours(@grids,@coloums + 1) # => Array of neighbour cells
 
   end
   

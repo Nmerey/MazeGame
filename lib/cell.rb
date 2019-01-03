@@ -19,7 +19,10 @@ class Cell
 		bottom_index = self.coloum_pos + (self.row_pos + 1) * coloums
 		left_index = (self.coloum_pos - 1) + self.row_pos * coloums 
 		
-		if top_index < 0
+		
+		#pass cell to neighbours array when is not not out box
+
+		if  top_index < 0 
 			all_cells[top_index] = nil
 		elsif right_index < 0
 			all_cells[right_index] = nil
@@ -30,9 +33,19 @@ class Cell
 		end
 
 		neighbours = [all_cells[top_index],all_cells[right_index],all_cells[bottom_index],all_cells[left_index]]
-		neighbours.compact #get rid off all cells which are out of the box
 
-		
+		#get rid off all visited cells
+		neighbours.compact.each do |neighbour|
+			
+			if neighbour.visited
+				neighbours.delete(neighbour)
+			end
+			
+		end
+
+		#get rid off all out of box cells
+		return neighbours.compact
+
 	end
 
 	def visit #run this method when cell is visited
