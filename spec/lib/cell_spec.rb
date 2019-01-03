@@ -31,11 +31,11 @@ describe "Cell" do
 		let(:all_cells) {[nil,cell_top,nil,cell_left,cell,cell_right,nil,cell_bottom,nil]}
 		
 		it " returns array of neighbour cells" do
-			expect(cell.check_neighbours(all_cells,3)).to eq [cell_top,cell_right,cell_bottom,cell_left]
+			expect(cell.check_neighbours(all_cells,3,3)).to eq [cell_top,cell_right,cell_bottom,cell_left]
 		end
 
 		it "when one or more of the neighbours is out of box" do
-			expect(cell2.check_neighbours(all_cells,3)).to eq ([cell_top,cell_left])
+			expect(cell2.check_neighbours(all_cells,3,3)).to eq ([cell_top,cell_left])
 		end
 
 
@@ -94,7 +94,7 @@ describe "Cell" do
 	def visited_cells(cells,cell)
 
 		cells[1].visit
-		cell.check_neighbours(cells,3)
+		cell.check_neighbours(cells,3,3)
 		
 	end
 	

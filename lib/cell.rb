@@ -1,4 +1,5 @@
 class Cell
+
 	attr_accessor :coloum_pos, :row_pos, :visited #making cell visitable
 	
 	@@all = []
@@ -12,27 +13,26 @@ class Cell
 		@visited = visited
 	end
 
-	def check_neighbours(all_cells,coloums)
+	def check_neighbours(all_cells,coloums,rows)
 
-		top_index = self.coloum_pos + (self.row_pos - 1) * coloums
-		right_index = (self.coloum_pos + 1) + self.row_pos * coloums
-		bottom_index = self.coloum_pos + (self.row_pos + 1) * coloums
-		left_index = (self.coloum_pos - 1) + self.row_pos * coloums 
+		neighbours = []
+		indexes = []
 		
+		top_index = find_index(self.coloum_pos,self.row_pos - 1,coloums,rows)
+		right_index = find_index(self.coloum_pos + 1,self.row_pos,coloums,rows)
+		bottom_index = find_index(self.coloum_pos,self.row_pos + 1,coloums,rows)
+		left_index = find_index(self.coloum_pos - 1,self.row_pos,coloums,rows)
 		
-		#pass cell to neighbours array when is not not out box
+		indexes = [top_index,right_index,bottom_index,left_index]
 
-		if  top_index < 0 
-			all_cells[top_index] = nil
-		elsif right_index < 0
-			all_cells[right_index] = nil
-		elsif bottom_index < 0
-			all_cells[bottom_index] = nil
-		elsif left_index < 0
-			all_cells[left_index] = nil
+		#Get rid off all out of box cells
+
+		indexes.compact.each do |i|
+			neighbours << all_cells[i]
+			
 		end
 
-		neighbours = [all_cells[top_index],all_cells[right_index],all_cells[bottom_index],all_cells[left_index]]
+		
 
 		#get rid off all visited cells
 		neighbours.compact.each do |neighbour|
@@ -43,8 +43,8 @@ class Cell
 			
 		end
 
-		#get rid off all out of box cells
-		return neighbours.compact
+		
+		neighbours.compact
 
 	end
 
@@ -97,6 +97,30 @@ class Cell
 	# 	walls = [top,right,bottom,left]
 		
 	# end
+
+	def find_index(i,j,coloums,rows)
+
+		if i < 0 || j < 0 || i > coloums -1 || j > rows -1
+			
+			return nil
+
+		else
+			return i + j * coloums
+
+		end
+	
+		
+	end
+
+	def check_index(i,all_cells,array)
+		
+		if i > 0 
+			array << all_cells[i]
+		end
+
+
+		
+	end
 
 	def params(i1,j1,i2,j2)
 
