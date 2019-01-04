@@ -7,7 +7,7 @@ class Cell
 	def initialize(coloum_pos,row_pos,visited = false)
 		@coloum_pos = coloum_pos
 		@row_pos = row_pos
-		@line_color = 0xff_ffffff
+		@line_color = 0xff_ffff88
 		@w = 40 #length of every wall
 		@@all << self
 		@visited = visited

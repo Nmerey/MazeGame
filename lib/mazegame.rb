@@ -4,21 +4,28 @@ require 'byebug'
 
 class Mazegame < Gosu::Window
   
-  def initialize coloums,rows, update_interval = 250000
+  def initialize coloums,rows
 
   	@coloums = coloums
   	@rows = rows
     height = @rows*40
     width = @coloums*40
     @grids = [] #All Cells combined gives grids
-    @visited_color = Gosu::Color.argb(0xff_808080)
+
+    #----------- COLORS ---------------#
+    @visited_color = Gosu::Color.argb(0xff_288888)
+    @start_color = Gosu::Color.argb(0xff_434564)
+    @destination_color = Gosu::Color.argb(0xff_234566)
+
     @neighbours = []
 
     @visited_cells = []
 
     grids #Gathering all the cells before iteration
-
-    @current = @grids.first
+    
+    @start = @grids[rand(coloums)]
+    @destination = @grids[-rand(coloums)]
+    @current = @start
 
     super width,height
     #every cell's height and width is equal to 40px
@@ -42,25 +49,23 @@ class Mazegame < Gosu::Window
 
 		if neighbours.length > 0 
 	   		
-	   		r = rand(neighbours.length) 
+	   		r = rand(neighbours.length)
 	   		next_cell = neighbours[r]
 
 	   		remove_wall(@current,next_cell)
 	   		@current = next_cell #Update current cell to random not visited neighbour
 	   	
-	   	elsif
-	   		
-	   		
-	   		@current = backtrack
-
 	   	else
-	   		@current.visited = true
+	   		
+	   		
+	   		@current = backtrack #Current cell goes back to find not visited neighbours
+
 	   	end
 	   	
 	else
 
 
-		return self.draw
+		return true
 
    	end
    	
@@ -70,9 +75,12 @@ class Mazegame < Gosu::Window
    def draw
 
    	
-   	
    	@grids.each do |cell|
-
+   		
+   		draw_rect(@start.coloum_pos*40,@start.row_pos*40,40,40,@start_color)
+   		draw_rect(@destination.coloum_pos*40,@destination.row_pos*40,40,40,@destination_color)
+   	
+   		#Draws 4 walls of all cells
    		draw_line(*cell.top_wall) if cell.walls[0]
    		draw_line(*cell.right_wall) if cell.walls[1]
    		draw_line(*cell.bottom_wall) if cell.walls[2]
@@ -83,6 +91,8 @@ class Mazegame < Gosu::Window
 
    		
    	end
+
+
 
 
   end
@@ -115,6 +125,10 @@ class Mazegame < Gosu::Window
   	
   end
 
+  def needs_cursor?
+  		
+  		true
+  end
 
 
   def caption
@@ -131,7 +145,7 @@ class Mazegame < Gosu::Window
   private
 
   def backtrack
-
+  	#Keep record of visited cells and returns last visited cell
   	@visited_cells.delete(@visited_cells.last)
   	@visited_cells.last
   	
