@@ -14,6 +14,8 @@ class Mazegame < Gosu::Window
     @visited_color = Gosu::Color.argb(0xff_808080)
     @neighbours = []
 
+    @visited_cells = []
+
     grids #Gathering all the cells before iteration
 
     @current = @grids.first
@@ -30,22 +32,35 @@ class Mazegame < Gosu::Window
   	if @current != nil
 
   		@current.visited = true
+
+  		@visited_cells << @current
+
    		neighbours = @current.check_neighbours(@grids,@coloums,@rows) # => Array of neighbour cells
    		neighbours.compact
+   		
+   		##puts "#{@current.coloum_pos},#{@current.row_pos}"
 
 		if neighbours.length > 0 
 	   		
 	   		r = rand(neighbours.length) 
-	   		
-	   		remove_wall(@current,neighbours[r])
-	   		@current = neighbours[r] #Update current cell to random not visited neighbour
+	   		next_cell = neighbours[r]
 
+	   		remove_wall(@current,next_cell)
+	   		@current = next_cell #Update current cell to random not visited neighbour
+	   	
+	   	elsif
+	   		
+	   		
+	   		@current = backtrack
+
+	   	else
+	   		@current.visited = true
 	   	end
 	   	
 	else
 
 
-		self.close!
+		return self.draw
 
    	end
    	
@@ -107,7 +122,41 @@ class Mazegame < Gosu::Window
     
   end
 
+  def params
+
+  	[@grids,@visited_cells]
+  	
+  end
+
   private
+
+  def backtrack
+
+  	@visited_cells.delete(@visited_cells.last)
+  	@visited_cells.last
+  	
+  	
+  end
+
+  def find_exit(current)
+
+  	x = current.walls.index(false)
+
+  	reusult = 	case x
+
+  	when 0
+  		temp = @grids.select{|cell| cell.coloum_pos == current.coloum_pos && cell.row_pos == current.row_pos - 1}
+  	when 2
+ 		temp = @grids.select{|cell| cell.coloum_pos == current.coloum_pos && cell.row_pos == current.row_pos + 1}
+ 	when 1
+ 		temp = @grids.select{|cell| cell.coloum_pos == current.coloum_pos + 1 && cell.row_pos == current.row_pos}
+ 	when 3
+ 		temp = @grids.select{|cell| cell.coloum_pos == current.coloum_pos - 1 && cell.row_pos == current.row_pos}
+ 		
+  	end
+  	
+  	reusult
+  end
 
 
   def grids 
