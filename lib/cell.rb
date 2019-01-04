@@ -1,10 +1,10 @@
 class Cell
 
-	attr_accessor :coloum_pos, :row_pos, :visited #making cell visitable
+	attr_accessor :coloum_pos, :row_pos, :visited, :cost, :checked #making cell visitable
 	
 	@@all = []
 
-	def initialize(coloum_pos,row_pos,visited = false)
+	def initialize(coloum_pos,row_pos,visited = false, checked = false)
 		@coloum_pos = coloum_pos
 		@row_pos = row_pos
 		@line_color = 0xff_ffff88
@@ -12,7 +12,10 @@ class Cell
 		@@all << self
 		@visited = visited
 		@walls = [true,true,true,true]
+		@cost = 0
+		@checked = checked
 	end
+
 
 	def check_neighbours(all_cells,coloums,rows)
 
@@ -34,17 +37,6 @@ class Cell
 		end
 
 		
-
-		#get rid off all visited cells
-		neighbours.compact.each do |neighbour|
-			
-			if neighbour.visited
-				neighbours.delete(neighbour)
-			end
-			
-		end
-
-		
 		neighbours.compact
 
 	end
@@ -52,6 +44,11 @@ class Cell
 	def visit #run this method when cell is visited
 
 		@visited = true
+		
+	end
+
+	def cost
+		@cost
 		
 	end
 
