@@ -36,6 +36,8 @@ describe Mazegame do
 
 	end
 
+	
+
 	describe ".remove_wall" do
 		
 		it " when next cell is right to current cell" do
