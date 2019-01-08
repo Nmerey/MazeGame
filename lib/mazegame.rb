@@ -83,7 +83,7 @@ class Mazegame < Gosu::Window
 
 	   		next_cell = neighbours[r]
 	   		
-	   		if r2 > 0.7
+	   		if r2 > 0.7 #Makes 30 percent of removing any second wall randomly
 
 	   			another_cell = neighbours[rand(neighbours.length)]
 	   			remove_wall(@current,another_cell)
@@ -198,7 +198,7 @@ class Mazegame < Gosu::Window
 
 
   def caption
-    "CLARK CODING CHALLENGE - MEREY NURLAN"
+    "CLARK CODING CHALLENGE"
     
   end
 

@@ -54,27 +54,27 @@ describe "Cell" do
 
 	describe ".top_wall" do
 		it "returns cell's top cordinates" do
-			expect(cell.top_wall).to eq([40,40,0xff_ffffff,80,40,0xff_ffffff])
+			expect(cell.top_wall).to eq([40,40,0xff_ffff88,80,40,0xff_ffff88])
 		end
 
 	end	
 	describe ".right_wall" do
 		it "returns cell's right cordinates" do
-			expect(cell.right_wall).to eq([80,40,0xff_ffffff,80,80,0xff_ffffff])
+			expect(cell.right_wall).to eq([80,40,0xff_ffff88,80,80,0xff_ffff88])
 		end
 
 	end	
 
 	describe ".bottom_wall" do
 		it "returns cell's bottom cordinates" do
-			expect(cell.bottom_wall).to eq([40,80,0xff_ffffff,80,80,0xff_ffffff])
+			expect(cell.bottom_wall).to eq([40,80,0xff_ffff88,80,80,0xff_ffff88])
 		end
 
 	end	
 
 	describe ".left_wall" do
 		it "returns cell's left cordinates" do
-			expect(cell.left_wall).to eq([40,40,0xff_ffffff,40,80,0xff_ffffff])
+			expect(cell.left_wall).to eq([40,40,0xff_ffff88,40,80,0xff_ffff88])
 		end
 
 	end
@@ -84,8 +84,19 @@ describe "Cell" do
 	def visited_cells(cells,cell)
 
 		cells[1].visit
-		cell.check_neighbours(cells,3,3)
+		unvisited = cell.check_neighbours(cells,3,3)
+
+		unvisited.each do |cell|
+
+			if cell.visited
+
+				unvisited.delete(cell)
+				
+			end
+			
+		end
 		
+		unvisited.compact
 	end
 	
 	def visit_cell(cell)

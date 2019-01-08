@@ -58,7 +58,7 @@ describe Mazegame do
 
 	describe ".caption" do
 		it "returns caption of game" do
-			expect(@game_window.caption).to eq 'Mazegame'
+			expect(@game_window.caption).to eq 'CLARK CODING CHALLENGE'
 		end
 	end
 	
